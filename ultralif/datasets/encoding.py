@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Spike encoding utilities for converting data to spike trains.
 
 Functions:
-    rate_encode:     Poisson rate coding (spike probability ∝ intensity).
-    latency_encode:  Latency coding (higher intensity → earlier spike).
+    rate_encode:     Poisson rate coding (spike probability ~ intensity).
+    latency_encode:  Latency coding (higher intensity -> earlier spike).
     temporal_encode: Phase-based temporal coding.
     direct_encode:   Repeat input at each timestep (no spike conversion).
 
@@ -20,7 +20,7 @@ def rate_encode(x: torch.Tensor, timesteps: int = 30, gain: float = 1.0) -> torc
     """
     Rate coding: convert pixel values to Poisson spike trains.
 
-    Higher pixel intensity → higher spike probability per timestep.
+    Higher pixel intensity -> higher spike probability per timestep.
 
     Args:
         x: Input tensor [batch, features] with values in [0, 1].
@@ -48,7 +48,7 @@ def latency_encode(x: torch.Tensor, timesteps: int = 30, tau: float = 5.0) -> to
     Args:
         x: Input tensor [batch, features] with values in (0, 1].
         timesteps: Number of time steps.
-        tau: Time constant (higher tau → slower responses).
+        tau: Time constant (higher tau -> slower responses).
 
     Returns:
         Spike train [batch, T, features] with at most one spike per neuron.

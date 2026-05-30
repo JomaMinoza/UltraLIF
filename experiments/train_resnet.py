@@ -1,21 +1,21 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 ResNet backbone + Spiking FC head experiments.
 
 Architecture:
-    ResNet18/50 (small-image variant) → features (extracted once per image)
-    → FC(feat_dim → hidden) → spiking neuron × T → FC(hidden → classes)
+    ResNet18/50 (small-image variant) -> features (extracted once per image)
+    -> FC(feat_dim -> hidden) -> spiking neuron x T -> FC(hidden -> classes)
 
 Features are extracted once from the ANN backbone, then the spiking head
 runs T timesteps on the same features (static datasets) or processes T
 event frames through the backbone (neuromorphic datasets).
 
-Model naming (CLI key → paper name):
-    lif         → LIF
-    ultratlif   → UltraLIF  (temporal, 2-term LSE)
-    ultratplif  → UltraPLIF (temporal, learnable tau)
-    ultradlif   → UltraDLIF (spatial, 3-term LSE)
-    ultradplif  → UltraDPLIF(spatial, learnable tau)
+Model naming (CLI key -> paper name):
+    lif         -> LIF
+    ultratlif   -> UltraLIF  (temporal, 2-term LSE)
+    ultratplif  -> UltraPLIF (temporal, learnable tau)
+    ultradlif   -> UltraDLIF (spatial, 3-term LSE)
+    ultradplif  -> UltraDPLIF(spatial, learnable tau)
 
 Usage:
     python experiments/train_resnet.py --dataset cifar10 --backbone resnet18
@@ -51,10 +51,10 @@ from ultralif.training.logging import TeeLogger
 
 class ResNet18Small(nn.Module):
     """
-    ResNet-18 backbone for small images (28×28 or 32×32).
+    ResNet-18 backbone for small images (28x28 or 32x32).
 
     Modifications vs standard ResNet-18:
-    - First conv: 3×3 stride=1 (was 7×7 stride=2)
+    - First conv: 3x3 stride=1 (was 7x7 stride=2)
     - MaxPool replaced with Identity (preserves spatial resolution)
 
     Args:

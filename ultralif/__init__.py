@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 UltraLIF — Fully Differentiable Spiking Neural Networks via Ultradiscretization.
 
@@ -14,11 +14,11 @@ Quick start:
     >>> best_acc, history, _ = train_model(model, train_loader, test_loader,
     ...                                     epochs=100, lr=1e-3, device='cuda')
 
-Model name mapping (code name → paper name):
-    UltraLIF   → UltraLIF  (temporal, 2-term LSE, fixed tau)
-    UltraPLIF  → UltraPLIF (temporal, 2-term LSE, learnable tau)
-    UltraDLIF  → UltraDLIF (spatial,  3-term LSE, fixed tau)
-    UltraDPLIF → UltraDPLIF(spatial,  3-term LSE, learnable tau)
+Model name mapping (code name -> paper name):
+    UltraLIF   -> UltraLIF  (temporal, 2-term LSE, fixed tau)
+    UltraPLIF  -> UltraPLIF (temporal, 2-term LSE, learnable tau)
+    UltraDLIF  -> UltraDLIF (spatial,  3-term LSE, fixed tau)
+    UltraDPLIF -> UltraDPLIF(spatial,  3-term LSE, learnable tau)
 """
 
 from .neurons.ultra import UltraLIF, UltraPLIF, UltraLIF_DS, UltraPLIF_DS

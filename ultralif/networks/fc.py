@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Fully-connected spiking neural network architectures.
 
@@ -19,7 +19,7 @@ class SNN(nn.Module):
     Single-layer Spiking Neural Network.
 
     Architecture:
-        Input → [rate encode] → fc1 → neuron → fc2 → output (averaged over T)
+        Input -> [rate encode] -> fc1 -> neuron -> fc2 -> output (averaged over T)
 
     For static inputs, pixel values are Poisson rate-encoded to spike trains.
     For neuromorphic inputs, the event frames are used directly.
@@ -87,7 +87,7 @@ class DeepSNN(nn.Module):
     Two-layer Spiking Neural Network with optional BatchNorm and residual connections.
 
     Architecture:
-        Input → fc1 → [BN] → neuron1 → fc2 → [BN] → neuron2 → [+skip] → fc3 → output
+        Input -> fc1 -> [BN] -> neuron1 -> fc2 -> [BN] -> neuron2 -> [+skip] -> fc3 -> output
 
     The residual skip connects neuron1's output to neuron2's output
     (hidden-to-hidden, not input-to-output).
@@ -179,7 +179,7 @@ class TripleSNN(nn.Module):
     Three-layer Spiking Neural Network with optional BatchNorm and residual connections.
 
     Architecture:
-        Input → fc1 → [BN] → n1 → fc2 → [BN] → n2 → [+skip] → fc3 → [BN] → n3 → [+skip] → fc4 → output
+        Input -> fc1 -> [BN] -> n1 -> fc2 -> [BN] -> n2 -> [+skip] -> fc3 -> [BN] -> n3 -> [+skip] -> fc4 -> output
 
     Args:
         neuron1: First hidden layer neuron.

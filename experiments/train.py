@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 UltraLIF Training Script
 
@@ -17,16 +17,16 @@ Usage:
     # 2-layer deep with BatchNorm
     python experiments/train.py --model all-deep-bn --dataset mnist --hidden 64
 
-Model naming (CLI key → paper name):
-    ultratlif   → UltraLIF  (temporal, main paper model)
-    ultratplif  → UltraPLIF (temporal + learnable tau)
-    ultradlif   → UltraDLIF (spatial diffusion)
-    ultradplif  → UltraDPLIF(spatial + learnable tau)
-    lif         → LIF
-    plif        → PLIF
-    dspike      → DSpike (Li et al. NeurIPS 2021)
-    dspike+     → DSpike+ (DSpike + learnable tau)
-    sigmalif    → SigmaLIF (ablation baseline)
+Model naming (CLI key -> paper name):
+    ultratlif   -> UltraLIF  (temporal, main paper model)
+    ultratplif  -> UltraPLIF (temporal + learnable tau)
+    ultradlif   -> UltraDLIF (spatial diffusion)
+    ultradplif  -> UltraDPLIF(spatial + learnable tau)
+    lif         -> LIF
+    plif        -> PLIF
+    dspike      -> DSpike (Li et al. NeurIPS 2021)
+    dspike+     -> DSpike+ (DSpike + learnable tau)
+    sigmalif    -> SigmaLIF (ablation baseline)
 """
 
 import sys
@@ -63,7 +63,7 @@ except ImportError:
 
 # =============================================================================
 # MODEL REGISTRIES
-# CLI key → (display name, neuron class)
+# CLI key -> (display name, neuron class)
 # =============================================================================
 
 # Single-layer FC

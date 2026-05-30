@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Convolutional spiking neural network architectures.
 
@@ -15,10 +15,10 @@ class ConvSNN(nn.Module):
     """
     2-layer Convolutional Spiking Neural Network.
 
-    Architecture (32×32 input):
-        Conv(in,32,3×3) → [BN] → Pool(2) → neuron1
-        → Conv(32,64,3×3) → [BN] → Pool(2) → neuron2
-        → FC → output
+    Architecture (32x32 input):
+        Conv(in,32,3x3) -> [BN] -> Pool(2) -> neuron1
+        -> Conv(32,64,3x3) -> [BN] -> Pool(2) -> neuron2
+        -> FC -> output
 
     Neuron dimensions are sized to the post-pool feature map (flattened).
 
@@ -117,12 +117,12 @@ class DeepConvSNN(nn.Module):
     """
     4-layer Convolutional Spiking Neural Network.
 
-    Architecture (32×32 input):
-        Conv(in,32,3×3) → [BN] → Pool(2) → neuron1
-        Conv(32,64,3×3) → [BN] → Pool(2) → neuron2
-        Conv(64,128,3×3) → [BN] → Pool(2) → neuron3
-        Conv(128,256,3×3) → [BN] → Pool(2) → neuron4
-        → FC(1024, n_classes)
+    Architecture (32x32 input):
+        Conv(in,32,3x3) -> [BN] -> Pool(2) -> neuron1
+        Conv(32,64,3x3) -> [BN] -> Pool(2) -> neuron2
+        Conv(64,128,3x3) -> [BN] -> Pool(2) -> neuron3
+        Conv(128,256,3x3) -> [BN] -> Pool(2) -> neuron4
+        -> FC(1024, n_classes)
 
     Args:
         neuron_cls: Neuron class.

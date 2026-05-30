@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Training metrics: spike rate counting and energy estimation."""
 
 import torch
@@ -52,7 +52,7 @@ def compute_energy_proxy(spike_rate: float, num_neurons: int = 0, timesteps: int
     """
     Compute a normalized energy proxy from the spike rate.
 
-    Energy ∝ #spikes. Normalized to a baseline rate of 0.5
+    Energy ~ #spikes. Normalized to a baseline rate of 0.5
     (random spiking), so 1.0x = same energy as a random network.
 
     Args:

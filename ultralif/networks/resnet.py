@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Fully spiking ResNet-18 architecture.
 
 Every ReLU is replaced with a spiking neuron. BatchNorm is always applied
-(Conv → BN → Neuron pattern throughout), following He et al. 2016
+(Conv -> BN -> Neuron pattern throughout), following He et al. 2016
 CIFAR-variant ResNet-20/56.
 
 Classes:
@@ -55,7 +55,7 @@ class SpikeBasicBlock(nn.Module):
 
     @staticmethod
     def _cw(h: torch.Tensor, neuron: nn.Module) -> torch.Tensor:
-        """Apply neuron channel-wise: (B,C,H,W) → neuron over C dim → (B,C,H,W)."""
+        """Apply neuron channel-wise: (B,C,H,W) -> neuron over C dim -> (B,C,H,W)."""
         B, C, H, W = h.shape
         flat = h.permute(0, 2, 3, 1).reshape(B * H * W, C)
         return neuron(flat).reshape(B, H, W, C).permute(0, 3, 1, 2).contiguous()
@@ -77,8 +77,8 @@ class SpikingResNet18(nn.Module):
     """
     Fully spiking ResNet-18 with channel-wise spiking neurons.
 
-    Follows the CIFAR-10 variant (3×3 stem conv, stride=1, no maxpool).
-    Architecture: stem + 4 layer groups of 2 blocks each (64→128→256→512 channels).
+    Follows the CIFAR-10 variant (3x3 stem conv, stride=1, no maxpool).
+    Architecture: stem + 4 layer groups of 2 blocks each (64->128->256->512 channels).
 
     Args:
         neuron_cls: Neuron class (called with channel count).

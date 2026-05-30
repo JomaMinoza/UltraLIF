@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Ablation Study: Effect of epsilon in UltraLIF variants (Appendix B.1).
 
@@ -334,7 +334,7 @@ def main():
     ckpt_dir = Path(__file__).parent / "checkpoints"
     ckpt_dir.mkdir(parents=True, exist_ok=True)
 
-    # Paper-name → ablation neuron class
+    # Paper-name -> ablation neuron class
     models = {
         "UltraLIF":   UltraLIF,
         "UltraPLIF":  UltraPLIF,
