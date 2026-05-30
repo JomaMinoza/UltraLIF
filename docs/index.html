@@ -28,11 +28,15 @@
     /* ---- Header block ---- */
     #header { padding: 4rem 1.5rem 2rem; text-align: center; border-bottom: 1px solid var(--border); }
     #header h1 {
-      font-size: 2rem;
+      font-size: clamp(1.4rem, 2.2vw, 1.85rem);
       font-weight: 700;
       line-height: 1.35;
       max-width: 760px;
       margin: 0 auto 1rem;
+      white-space: nowrap;
+    }
+    @media (max-width: 700px) {
+      #header h1 { white-space: normal; font-size: 1.3rem; }
     }
     .venue-tag {
       display: inline-block;

@@ -2,9 +2,9 @@
 
 Official code for the ICML 2026 paper:
 
-> **UltraLIF: Fully Differentiable Spiking Neural Networks via Ultradiscretization**
+> **UltraLIF: Fully Differentiable Spiking Neural Networks via Ultradiscretization and Max-Plus Algebra**
 > Jose Marie Antonio Miñoza. *ICML 2026.*
-> [arXiv:2602.11206](https://arxiv.org/abs/2602.11206)
+> [Paper](https://openreview.net/forum?id=QdDli9UoLK) | [arXiv](https://arxiv.org/abs/2602.11206) | [Project Page](https://JomaMinoza.github.io/UltraLIF/)
 
 ## Overview
 
@@ -19,19 +19,32 @@ V_i(t) = LSE_ε(V_{i-1}, V_i, V_{i+1}) + I_i   # UltraDLIF (spatial,  3-term)
 
 No surrogate gradients. No neuromorphic hardware required.
 
+## Results at T=1 (Ultra-Low Latency)
+
+| Dataset      | Best Ultra | Best Baseline | Gain    |
+|-------------|-----------|---------------|---------|
+| SHD          | **51.24%** (UltraDLIF)  | 40.02% (FullPLIF) | +11.22pp |
+| DVS-Gesture  | **60.23%** (UltraPLIF)  | 52.27% (PLIF)     | +7.96pp  |
+| N-MNIST      | **94.14%** (UltraDLIF)  | 90.23% (DSpike)   | +3.91pp  |
+| CIFAR-10     | **43.27%** (UltraPLIF)  | 40.26% (DSpike+)  | +3.01pp  |
+| Fashion-MNIST| **83.02%** (UltraPLIF)  | 82.67% (DSpike+)  | +0.35pp  |
+| MNIST        | **95.67%** (UltraDLIF)  | 95.58% (DSpike+)  | +0.09pp  |
+
+See the [project page](https://JomaMinoza.github.io/UltraLIF/) for interactive visualizations and full results.
+
 ## Model Reference
 
-| Paper Name  | CLI Key     | Description                            |
-|-------------|-------------|----------------------------------------|
-| UltraLIF    | `ultratlif` | Temporal, 2-term LSE, fixed τ         |
-| UltraPLIF   | `ultratplif`| Temporal, 2-term LSE, learnable τ     |
-| UltraDLIF   | `ultradlif` | Spatial, 3-term LSE, fixed τ          |
-| UltraDPLIF  | `ultradplif`| Spatial, 3-term LSE, learnable τ      |
-| LIF         | `lif`       | Standard LIF (surrogate gradient)      |
-| PLIF        | `plif`      | LIF with learnable τ                  |
-| DSpike      | `dspike`    | Li et al. NeurIPS 2021                |
-| DSpike+     | `dspike+`   | DSpike with learnable τ               |
-| SigmaLIF    | `sigmalif`  | Sigmoid-only ablation baseline         |
+| Paper Name  | CLI Key     | Description                        |
+|-------------|-------------|------------------------------------|
+| UltraLIF    | `ultratlif` | Temporal, 2-term LSE, fixed τ      |
+| UltraPLIF   | `ultratplif`| Temporal, 2-term LSE, learnable τ  |
+| UltraDLIF   | `ultradlif` | Spatial, 3-term LSE, fixed τ       |
+| UltraDPLIF  | `ultradplif`| Spatial, 3-term LSE, learnable τ   |
+| LIF         | `lif`       | Standard LIF (surrogate gradient)  |
+| PLIF        | `plif`      | LIF with learnable τ               |
+| DSpike      | `dspike`    | Li et al. NeurIPS 2021             |
+| DSpike+     | `dspike+`   | DSpike with learnable τ            |
+| SigmaLIF    | `sigmalif`  | Sigmoid-only ablation baseline     |
 
 ## Installation
 
@@ -40,8 +53,6 @@ git clone https://github.com/JomaMinoza/UltraLIF.git
 cd UltraLIF
 pip install -r requirements.txt
 ```
-
-For neuromorphic datasets, tonic is required (included in requirements.txt).
 
 ## Quick Start
 
@@ -85,20 +96,20 @@ best_acc, history, _ = train_model(
     track_spikes=True,
 )
 print(f"Best accuracy: {best_acc:.2%}")
-print(f"Learned ε: {neuron.eps.item():.3f}")
+print(f"Learned eps: {neuron.eps.item():.3f}")
 ```
 
 ## Supported Datasets
 
-| Dataset      | Type          | Classes | Input dim |
-|-------------|---------------|---------|-----------|
-| `mnist`     | Static        | 10      | 784       |
-| `fashion`   | Static        | 10      | 784       |
-| `cifar10`   | Static        | 10      | 3072      |
-| `nmnist`    | Neuromorphic  | 10      | 2×34×34   |
-| `dvs_gesture`| Neuromorphic | 11      | 2×128×128 |
-| `shd`       | Audio spike   | 20      | 700       |
-| `ssc`       | Audio spike   | 35      | 700       |
+| Dataset       | Type          | Classes | Input dim  |
+|--------------|---------------|---------|------------|
+| `mnist`      | Static        | 10      | 784        |
+| `fashion`    | Static        | 10      | 784        |
+| `cifar10`    | Static        | 10      | 3072       |
+| `nmnist`     | Neuromorphic  | 10      | 2x34x34    |
+| `dvs_gesture`| Neuromorphic  | 11      | 2x128x128  |
+| `shd`        | Audio spike   | 20      | 700        |
+| `ssc`        | Audio spike   | 35      | 700        |
 
 ## Structure
 
@@ -113,7 +124,8 @@ UltraLIF/
 │   ├── train.py        # Main FC/Conv/ResNet training script
 │   └── train_resnet.py # ResNet backbone experiments
 ├── ablations/
-│   └── eps_ablation.py # ε ablation (Appendix B.1)
+│   └── eps_ablation.py # eps ablation (Appendix B.1)
+├── docs/               # Project page (GitHub Pages)
 └── scripts/
     └── download_datasets.py
 ```
@@ -122,7 +134,7 @@ UltraLIF/
 
 ```bibtex
 @inproceedings{minoza2026ultralif,
-  title     = {UltraLIF: Fully Differentiable Spiking Neural Networks via Ultradiscretization},
+  title     = {UltraLIF: Fully Differentiable Spiking Neural Networks via Ultradiscretization and Max-Plus Algebra},
   author    = {Mi{\~n}oza, Jose Marie Antonio},
   booktitle = {International Conference on Machine Learning},
   year      = {2026},
