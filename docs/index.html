@@ -403,13 +403,12 @@
   <div class="inner wide">
     <div class="sec-title">Interactive: Membrane Update &amp; Spike Scale</div>
     <p class="results-intro">
-      The &epsilon; slider above is shared &mdash; it updates the left plot here too. In UltraLIF,
-      &epsilon; governs the softness of the max-plus membrane update
-      <strong>and</strong> simultaneously sets the spike sharpness to 1/&epsilon;.
-      The &beta; slider (right) controls spike sharpness independently,
-      as in the disentangled variant (Appendix A.3), where &epsilon; and &beta; serve
-      physically distinct roles: &epsilon; = membrane integration noise,
-      &beta; = spike threshold precision.
+      In standard UltraLIF a single &epsilon; does two jobs at once: it sets the softness of the
+      max-plus (LSE) membrane update <strong>and</strong> the spike sharpness (= 1/&epsilon;), so the
+      two are coupled. The decoupled variant (UltraLIF-DS) adds a separate spike scale &beta;, giving
+      each parameter one clean role: <strong>&epsilon; = membrane smoothness</strong> and
+      <strong>&beta; = spike sharpness</strong>, set independently. Drag &epsilon; to reshape the
+      membrane (left); drag &beta; to sharpen the spike (right) without touching the membrane.
     </p>
 
     <div class="interactive-wrap two-col">
@@ -468,9 +467,9 @@
     </div>
 
     <div class="callout" style="margin-top:1.2rem;">
-      In standard UltraLIF, spike sharpness = 1/&epsilon; &mdash; coupling membrane softness
-      and spike precision. Both are shown updating together when you move the &epsilon; slider.
-      &beta; lets you explore what happens when they are set independently.
+      In standard UltraLIF spike sharpness is locked to 1/&epsilon;, so you cannot sharpen the spikes
+      without also hardening the membrane. Decoupling adds &beta;: &epsilon; keeps the membrane smooth
+      and trainable while &beta; sharpens the spikes toward binary, independently.
     </div>
   </div>
 </section>
